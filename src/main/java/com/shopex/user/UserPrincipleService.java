@@ -8,12 +8,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
 
-@Service
+//@Service
 public class UserPrincipleService implements UserDetailsService {
 
     @Autowired
     UserRepository userRepository;
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

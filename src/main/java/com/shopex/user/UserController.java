@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping(path = "/user")
 public class UserController {
@@ -13,9 +15,7 @@ public class UserController {
 //    UserPrincipleService userPrincipleService;
 
     @GetMapping(path = "/login")
-    public String login(){
-
-        return "ghvkjhbk";
-
+    public String login(Principal principal){
+        return principal.getName();
     }
 }
