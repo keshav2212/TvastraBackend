@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
 
-//@Service
+@Service
 public class UserPrincipleService implements UserDetailsService {
 
     @Autowired
@@ -26,7 +26,6 @@ public class UserPrincipleService implements UserDetailsService {
         } catch (NoSuchElementException e) {
             return null;
         }
-
     }
 
 
