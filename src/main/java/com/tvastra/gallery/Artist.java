@@ -1,6 +1,7 @@
 package com.tvastra.gallery;
 
 import com.tvastra.gallery.artwork.Artwork;
+import com.tvastra.user.User;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,6 +17,10 @@ public class Artist {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "artist")
     private List<Artwork> artworks;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     public Long getId() {
         return id;
@@ -41,17 +46,25 @@ public class Artist {
         this.artworks = artworks;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Artist artist = (Artist) o;
-        return Objects.equals(id, artist.id) && Objects.equals(name, artist.name) && Objects.equals(artworks, artist.artworks);
+        return Objects.equals(id, artist.id) && Objects.equals(name, artist.name) && Objects.equals(artworks, artist.artworks) && Objects.equals(user, artist.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, artworks);
+        return Objects.hash(id, name, artworks, user);
     }
 
     @Override
@@ -60,6 +73,7 @@ public class Artist {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", artworks=" + artworks +
+                ", user=" + user +
                 '}';
     }
 }

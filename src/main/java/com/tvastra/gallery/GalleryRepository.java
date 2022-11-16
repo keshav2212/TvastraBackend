@@ -5,8 +5,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface GalleryRepository extends JpaRepository<Gallery, Long> {
 //    @Query("SELECT G.ID FROM GALLERY G WHERE G.NAME=:name")
 //    Long findByName(@Param("name") String name);
+        Gallery findByName(String name);
 }
