@@ -49,6 +49,7 @@ dependencies {
 	testImplementation 'org.springframework:spring-webflux'
 	testImplementation 'org.springframework.graphql:spring-graphql-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.7.5'
 }
 
 tasks.named('test') {
