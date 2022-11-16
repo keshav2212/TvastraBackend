@@ -17,17 +17,17 @@ public class GalleryController {
     @Autowired
     private ModelMapper modelMapper;
     @Autowired
-    private ArtworkService artworkService;
+    private GalleryService galleryService;
 
-//    @GetMapping("/{galleryName}")
-//    public List<ArtworkDTO> getArtwork(@PathVariable String galleryName) {
-//
-//        List<Artwork> artworks = artworkService.getAllArtworks(galleryName);
-//
-//        List<ArtworkDTO> artworkDTOS = artworks.stream()
-//                .map(artwork -> modelMapper.map(artwork, ArtworkDTO.class))
-//                .collect(Collectors.toList());
-//
-//        return artworkDTOS;
-//    }
+    @GetMapping("/{galleryName}")
+    public List<ArtworkDTO> getArtwork(@PathVariable String galleryName) {
+
+        List<Artwork> artworks = galleryService.getArtworks(galleryName);
+
+        List<ArtworkDTO> artworkDTOS = artworks.stream()
+                .map(artwork -> modelMapper.map(artwork, ArtworkDTO.class))
+                .collect(Collectors.toList());
+
+        return artworkDTOS;
+    }
 }
