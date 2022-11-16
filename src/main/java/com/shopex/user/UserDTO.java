@@ -1,14 +1,19 @@
 package com.shopex.user;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import javax.validation.constraints.NotNull;
 
 public class UserDTO {
 
+
+    @NotNull(message = "username required")
     private String username;
+
     private String name;
+    @NotNull(message = "password required")
     private String password;
     private String email;
+    @NotNull(message = "role is required")
     private Role role;
 
     public UserDTO(String username, String name, String password, String email, String role) {
@@ -17,6 +22,9 @@ public class UserDTO {
         this.password = password;
         this.email = email;
         this.role = Role.valueOf(role.toUpperCase());
+    }
+
+    public UserDTO() {
     }
 
     public String getUsername() {
