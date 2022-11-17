@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  app:
+    image: 'tvastra'
+    build:
+      context: .
+    container_name: app
+    depends_on:
+      - tvastra
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://tvastra:5432/tvastra
+      - SPRING_DATASOURCE_USERNAME=compose-postgres
+      - SPRING_DATASOURCE_PASSWORD=compose-postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+  tvastra:
+    image: 'postgres:14.1-alpine'
+    ports:
+      - "5432:5432"
+    container_name: tvastra
+    environment:
+      - POSTGRES_USER=compose-postgres
+      - POSTGRES_PASSWORD=compose-postgres
+      - POSTGRES_DB=tvastra
