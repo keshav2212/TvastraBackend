@@ -1,9 +1,7 @@
 package com.shopex.user;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sun.istack.NotNull;
-
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "USERS")
@@ -58,19 +56,15 @@ public class User {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(username, user.username) && role == user.role;
+    }
+
+    @Override
     public int hashCode() {
-        return super.hashCode();
+        return Objects.hash(id, username, password, role);
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
-
-    @Override
-    public String toString() {
-        return super.toString();
-    }
-
-
 }
