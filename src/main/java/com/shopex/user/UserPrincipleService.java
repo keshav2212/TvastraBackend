@@ -34,11 +34,11 @@ public class UserPrincipleService implements UserDetailsService {
         }
     }
 
-    public void saveUser(UserDTO newUser) throws UserNameAlreadyExistsException {
-        if(findByUsername(newUser.getUsername())==null){
+    public User saveUser(UserDTO newUser) throws UserNameAlreadyExistsException {
+        if (findByUsername(newUser.getUsername()) == null) {
             String password = passwordEncoder.encode(newUser.getPassword());
-            userRepository.save(new User(newUser.getUsername(), password, newUser.getRole()));
-        }else{
+            return userRepository.save(new User(newUser.getUsername(), password, newUser.getRole()));
+        } else {
             throw new UserNameAlreadyExistsException();
         }
     }
