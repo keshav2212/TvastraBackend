@@ -9,7 +9,7 @@ import javax.validation.Valid;
 import java.security.Principal;
 
 @RestController
-@RequestMapping(path = "/user")
+@RequestMapping
 public class UserController {
 
     @Autowired
@@ -22,7 +22,7 @@ public class UserController {
         return principal.getName();
     }
 
-    @PostMapping(path = "/register")
+    @PostMapping(path = "/users")
     public Message register(@Valid @RequestBody UserDTO newUser)  {
         try {
             userPrincipleService.saveUser(newUser);
