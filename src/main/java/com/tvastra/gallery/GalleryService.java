@@ -14,12 +14,17 @@ public class GalleryService {
     GalleryRepository galleryRepository;
 
     @Autowired
-    ArtistService artistService;
+    ArtworkService artworkService;
 
-
-    public List<Artwork> getArtworks(String name){
-        Long galleryId = galleryRepository.findByName(name).getId();
-        return artistService.getArtworks(galleryId);
+    public List<Artwork> getArtworks(String galleryName){
+        Long id = galleryRepository.findByName(galleryName).getId();
+        return artworkService.getGalleryArtworks(id);
+    }
+    public void saveGallery(Gallery gallery) {
+        galleryRepository.save(gallery);
     }
 
+    public Gallery getById(Long id){
+        return galleryRepository.findById(id).orElse(null);
+    }
 }
