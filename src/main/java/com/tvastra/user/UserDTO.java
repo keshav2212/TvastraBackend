@@ -1,5 +1,7 @@
 package com.tvastra.user;
 
+import javax.validation.constraints.NotNull;
+
 public class UserDTO {
 
 
