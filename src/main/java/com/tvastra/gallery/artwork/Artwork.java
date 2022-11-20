@@ -1,9 +1,11 @@
 package com.tvastra.gallery.artwork;
 
 import com.tvastra.Price.Price;
-import com.tvastra.gallery.Artist;
 import com.tvastra.gallery.Gallery;
 import com.tvastra.gallery.category.Category;
+import com.tvastra.user.User;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -11,21 +13,39 @@ import java.util.Objects;
 @Entity
 public class Artwork {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
     private ArtworkInfo info;
 
-    @JoinColumn(name = "artist_id")
+    @JoinColumn(name = "user_id")
     @ManyToOne(cascade = CascadeType.ALL)
-    private Artist artist;
+    private User addedBy;
+
+    @JoinColumn(name= "gallery_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Gallery gallery;
+
     private Price price;
 
     @Column(name = "art_image_path")
     private String artImagePath;
-    @ManyToOne
+    @JoinColumn(name = "category_id")
+    @ManyToOne(cascade = CascadeType.ALL)
     private Category category;
+
+    public Artwork() {
+    }
+
+    public Artwork( ArtworkInfo info, User addedBy, Gallery gallery, Price price, String artImagePath, Category category) {
+        this.info = info;
+        this.addedBy = addedBy;
+        this.gallery = gallery;
+        this.price = price;
+        this.artImagePath = artImagePath;
+        this.category = category;
+    }
 
     public Long getId() {
         return id;
@@ -43,12 +63,20 @@ public class Artwork {
         this.info = info;
     }
 
-    public Artist getArtist() {
-        return artist;
+    public User getAddedBy() {
+        return addedBy;
     }
 
-    public void setArtist(Artist artist) {
-        this.artist = artist;
+    public void setAddedBy(User addedBy) {
+        this.addedBy = addedBy;
+    }
+
+    public Gallery getGallery() {
+        return gallery;
+    }
+
+    public void setGallery(Gallery gallery) {
+        this.gallery = gallery;
     }
 
     public Price getPrice() {
@@ -78,25 +106,13 @@ public class Artwork {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Artwork artwork = (Artwork) o;
-        return Objects.equals(id, artwork.id) && Objects.equals(info, artwork.info) && Objects.equals(artist, artwork.artist) && Objects.equals(price, artwork.price) && Objects.equals(artImagePath, artwork.artImagePath) && Objects.equals(category, artwork.category);
+        return id != null && Objects.equals(id, artwork.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, info, artist, price, artImagePath, category);
-    }
-
-    @Override
-    public String toString() {
-        return "Artwork{" +
-                "id=" + id +
-                ", info=" + info +
-                ", artist=" + artist +
-                ", price=" + price +
-                ", artImagePath='" + artImagePath + '\'' +
-                ", category=" + category +
-                '}';
+        return getClass().hashCode();
     }
 }
