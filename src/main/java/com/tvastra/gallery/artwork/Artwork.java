@@ -4,7 +4,6 @@ import com.tvastra.Price.Price;
 import com.tvastra.gallery.Gallery;
 import com.tvastra.gallery.category.Category;
 import com.tvastra.user.User;
-import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
