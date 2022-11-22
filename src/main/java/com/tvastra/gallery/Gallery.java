@@ -1,12 +1,16 @@
 package com.tvastra.gallery;
 
 import com.tvastra.gallery.artwork.Artwork;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
+@AllArgsConstructor
+@Builder
 public class Gallery {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
