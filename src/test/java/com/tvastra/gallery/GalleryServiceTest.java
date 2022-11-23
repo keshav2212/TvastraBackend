@@ -25,9 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest(classes = TvastraApplication.class)
 @ExtendWith(MockitoExtension.class)
-@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 public class GalleryServiceTest {
 
     @InjectMocks
@@ -58,6 +56,7 @@ public class GalleryServiceTest {
 
         Gallery actual = galleryService.getById(getRandomLong());
 
+        assertEquals(actual, gallery);
         verify(galleryRepository, times(1)).findById(anyLong());
         verifyNoMoreInteractions(galleryRepository);
 
