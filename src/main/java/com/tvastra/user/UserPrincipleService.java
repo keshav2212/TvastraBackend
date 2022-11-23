@@ -26,8 +26,12 @@ public class UserPrincipleService implements UserDetailsService {
         return new UserPrinciple(user);
     }
 
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username).orElse(null);
+    private User findByUsername(String username) {
+        try {
+            return userRepository.findByUsername(username).get();
+        } catch (NoSuchElementException e) {
+            return null;
+        }
     }
 
     public User saveUser(UserDTO newUser) throws UserNameAlreadyExistsException {
