@@ -9,14 +9,6 @@ public class ArtworkInfo {
 
     private String description;
 
-    public ArtworkInfo() {
-    }
-
-    public ArtworkInfo(String title, String description) {
-        this.title = title;
-        this.description = description;
-    }
-
     public String getTitle() {
         return title;
     }
