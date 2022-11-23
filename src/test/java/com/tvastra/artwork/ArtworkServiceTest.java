@@ -25,7 +25,6 @@ import static org.mockito.Mockito.*;
 
 @SpringBootTest(classes = TvastraApplication.class)
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
-
 public class ArtworkServiceTest {
 
     @InjectMocks
