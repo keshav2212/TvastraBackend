@@ -31,15 +31,7 @@ public class ArtworkService {
     }
 
     public void saveArtwork(ArtworkDTO artworkDTO, String path) {
-        Artwork artwork = new Artwork(
-                new ArtworkInfo(
-                        artworkDTO.getInfo().getTitle(),
-                        artworkDTO.getInfo().getDescription()),
-                principleService.findByUsername(artworkDTO.getUser()), //relook
-                galleryService.getById(artworkDTO.getGalleryId()),
-                new Price(artworkDTO.getPrice().getAmount(), artworkDTO.getPrice().getCurrency()),
-                path,
-                categoryService.getById(artworkDTO.getCategoryId()));
+        Artwork artwork = new Artwork(new ArtworkInfo(artworkDTO.getInfo().getTitle(), artworkDTO.getInfo().getDescription()), principleService.findByUsername(artworkDTO.getUser()), galleryService.getById(artworkDTO.getGalleryId()), new Price(artworkDTO.getPrice().getAmount(), artworkDTO.getPrice().getCurrency()), path, categoryService.getById(artworkDTO.getCategoryId()));
         artworkRepository.save(artwork);
     }
 }
