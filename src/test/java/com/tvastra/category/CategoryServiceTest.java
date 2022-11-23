@@ -5,8 +5,10 @@ import com.tvastra.gallery.category.Category;
 import com.tvastra.gallery.category.CategoryRepository;
 import com.tvastra.gallery.category.CategoryService;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,8 +20,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest(classes = TvastraApplication.class)
-@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
+@ExtendWith(MockitoExtension.class)
 public class CategoryServiceTest {
 
     @InjectMocks

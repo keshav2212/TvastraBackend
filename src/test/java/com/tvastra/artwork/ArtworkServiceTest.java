@@ -14,8 +14,10 @@ import com.tvastra.gallery.category.CategoryService;
 import com.tvastra.user.User;
 import com.tvastra.user.UserPrincipleService;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,9 +25,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest(classes = TvastraApplication.class)
-@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
-
+@ExtendWith(MockitoExtension.class)
 public class ArtworkServiceTest {
 
     @InjectMocks
