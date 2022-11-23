@@ -8,10 +8,8 @@ import com.tvastra.gallery.artwork.ArtworkService;
 import com.tvastra.gallery.category.Category;
 import com.tvastra.user.User;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,7 +24,6 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest(classes = TvastraApplication.class)
-@ExtendWith(MockitoExtension.class)
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 public class GalleryServiceTest {
 
@@ -58,6 +55,7 @@ public class GalleryServiceTest {
 
         Gallery actual = galleryService.getById(getRandomLong());
 
+        assertEquals(actual, gallery);
         verify(galleryRepository, times(1)).findById(anyLong());
         verifyNoMoreInteractions(galleryRepository);
 
