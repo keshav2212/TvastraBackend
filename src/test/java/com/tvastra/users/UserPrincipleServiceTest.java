@@ -1,6 +1,6 @@
 package com.tvastra.users;
 
-import com.tvastra.TvastraApplication;
+import com.tvastra.ShopexApplication;
 import com.tvastra.exceptions.UserNameAlreadyExistsException;
 import com.tvastra.user.User;
 import com.tvastra.user.UserDTO;
@@ -19,7 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest(classes = TvastraApplication.class)
+@SpringBootTest(classes = ShopexApplication.class)
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 public class UserPrincipleServiceTest {
