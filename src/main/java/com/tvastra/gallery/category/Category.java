@@ -1,14 +1,9 @@
 package com.tvastra.gallery.category;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@AllArgsConstructor
-@Builder
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

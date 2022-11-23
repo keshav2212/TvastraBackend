@@ -4,16 +4,12 @@ import com.tvastra.Price.Price;
 import com.tvastra.gallery.Gallery;
 import com.tvastra.gallery.category.Category;
 import com.tvastra.user.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@AllArgsConstructor
-@Builder
 public class Artwork {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
