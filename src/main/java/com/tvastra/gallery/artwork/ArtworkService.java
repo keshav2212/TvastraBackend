@@ -16,7 +16,10 @@ public class ArtworkService {
     GalleryService galleryService;
 
 
-
+//    public List<Artwork> getAllArtworks(String galleryName){
+//        Long id = galleryService.getByName(galleryName);
+//        return artworkRepository.findByGalleryId(id);
+//    }
 
 
 }
