@@ -12,11 +12,9 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.is;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -25,16 +23,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = TvastraApplication.class)
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
-public class CategoryControllerTest {
+public class CategoryControllerIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
     private CategoryRepository categoryRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @BeforeEach
     public void before() {
@@ -60,15 +55,13 @@ public class CategoryControllerTest {
                 .andExpect(jsonPath("$[0].name", is("test-category1")));
     }
 
-//    @Test
-//    public void shouldBeAbleToPostSuccessfully() throws Exception {
-//        mockMvc.perform(post("/category")
-//                        .with(user("user"))
-//                        .with(httpBasic("user", "pass"))
-//                        .param("name", "test-category"))
-//                .andExpect(status().isOk());
-//
-//    }
+    @Test
+    public void shouldBeAbleToPostSuccessfully() throws Exception {
+        mockMvc.perform(post("/category")
+                        .with(user("user"))
+                        .param("category", "test-category"))
+                .andExpect(status().isOk()).andReturn();
 
+    }
 
 }
