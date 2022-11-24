@@ -45,8 +45,9 @@ public class GalleryController {
     }
 
     @PostMapping("/create-gallery")
-    public void createGallery(@RequestBody GalleryDTO galleryDTO) {
-        galleryService.saveGallery(new Gallery(galleryDTO.getName()));
+    public void createGallery(@RequestParam("gallery") String gallery) {
+        galleryService.saveGallery(gallery);
+
     }
 
     @PostMapping("/upload-your-artwork")
