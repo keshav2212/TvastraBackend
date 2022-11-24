@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Embeddable
 public class Price {
-    private Long amount;
+    private int amount;
 
     @Enumerated(EnumType.STRING)
     private Currency currency;
@@ -12,17 +12,17 @@ public class Price {
     public Price() {
     }
 
-    public Price(Long amount, Currency currency) {
+    public Price(int amount, Currency currency) {
         this.amount = amount;
         this.currency = currency;
     }
 
 
-    public Long getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(Long amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 
