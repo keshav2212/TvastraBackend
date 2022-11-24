@@ -20,6 +20,7 @@ public class GalleryService {
         Long id = galleryRepository.findByName(galleryName).getId();
         return artworkService.getGalleryArtworks(id);
     }
+
     public void saveGallery(String gallery) {
         galleryRepository.save(new Gallery(gallery));
     }

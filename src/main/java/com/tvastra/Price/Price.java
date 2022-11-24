@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Embeddable
 public class Price {
+
     private int amount;
 
     @Enumerated(EnumType.STRING)
@@ -16,7 +17,6 @@ public class Price {
         this.amount = amount;
         this.currency = currency;
     }
-
 
     public int getAmount() {
         return amount;
