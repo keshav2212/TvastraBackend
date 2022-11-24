@@ -43,7 +43,7 @@ public class GalleryServiceTest {
         Gallery gallery = Gallery.builder().name(inputGalleryName).build();
         when(galleryRepository.save(any(Gallery.class))).thenReturn(gallery);
 
-        galleryService.saveGallery(gallery);
+        galleryService.saveGallery(inputGalleryName);
 
         verify(galleryRepository, times(1)).save(any(Gallery.class));
         verifyNoMoreInteractions(galleryRepository);
