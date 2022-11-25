@@ -5,6 +5,8 @@ import com.tvastra.gallery.artwork.Artwork;
 import com.tvastra.gallery.artwork.ArtworkService;
 import com.tvastra.gallery.artwork.model.ArtworkDTO;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/gallery")
 public class GalleryController {
 
+    Logger logger = LoggerFactory.getLogger(GalleryController.class);
     @Autowired
     private Environment environment;
     @Autowired
@@ -53,7 +56,6 @@ public class GalleryController {
     @PostMapping("/upload-your-artwork")
     public void postArtwork(@RequestParam("image") MultipartFile multipartFile, @RequestParam("model") String data) throws IOException {
 
-        StringBuilder sb = new StringBuilder();
         Path filePath = Paths.get(environment.getProperty("file.uploads.path", "src/main/uploads"), multipartFile.getOriginalFilename());
         Files.write(filePath, multipartFile.getBytes());
         ObjectMapper mapper = new ObjectMapper();
