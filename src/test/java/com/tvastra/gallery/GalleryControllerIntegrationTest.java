@@ -24,7 +24,7 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.HashMap;
+import java.io.FileInputStream;
 
 import static org.hamcrest.Matchers.is;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
@@ -66,26 +66,27 @@ public class GalleryControllerIntegrationTest {
                 .andExpect(status().isOk()).andReturn();
     }
 
-//    @Test
-//    public void shouldBeAbleToPostArtworksSuccessfully() throws Exception {
-////        FileInputStream fileInputStream = new FileInputStream("/uploads/image.webp");
-//
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        ArtworkDTO artworkDTO = new ArtworkDTO(new ArtworkInfoDTO("test_title", "test_description"), new Price(222, Currency.RUPEE), 1L, 1L, "test-user");
-//
-//        MockMultipartFile mockMultipartImageFile = new MockMultipartFile("file", "test_image.jpeg", String.valueOf(MediaType.IMAGE_JPEG), "<<jpeg data>>".getBytes());
-//        String jsonData =  objectMapper.writeValueAsString(artworkDTO);
-//
-//        HashMap<String, String> contentTypeParams = new HashMap<String, String>();
-//        contentTypeParams.put("boundary", "boundary");
-//        MediaType mediaType = new MediaType("multipart", "form-data", contentTypeParams);
-//        mockMvc.perform(multipart("/gallery/upload-your-artwork")
-//                        .file(mockMultipartImageFile)
-//                        .with(user("user"))
-////                        .param("image", String.valueOf(mockMultipartImageFile))
-//                        .param("model", jsonData))
-//                .andExpect(status().isOk());
-//    }
+    @Test
+    public void shouldBeAbleToPostArtworksSuccessfully() throws Exception {
+        FileInputStream inputStream = new FileInputStream("src/test/data/image.webp");
+        MockMultipartFile uploadFile = new MockMultipartFile("image", "image.webp", "image/webp", inputStream);
+        ObjectMapper objectMapper = new ObjectMapper();
+        ArtworkDTO artworkDTO = new ArtworkDTO(
+                new ArtworkInfoDTO("test_title", "test_description"),
+                new Price(222, Currency.RUPEE),
+                1L,
+                1L,
+                "test-user"
+        );
+        String jsonData = objectMapper.writeValueAsString(artworkDTO);
+
+        mockMvc.perform(multipart("/gallery/upload-your-artwork")
+                        .file(uploadFile).with(user("user"))
+                        .param("model", jsonData))
+                .andExpect(status().isOk())
+                .andReturn();
+
+    }
 
 
     @Test
@@ -96,8 +97,8 @@ public class GalleryControllerIntegrationTest {
         artworkRepository.save(new Artwork(info, addedBy, test_gallery, new Price(), "uploads", new Category()));
 
         mockMvc.perform(get("/gallery/test_gallery")
-                .with(user("user"))
-                .contentType(MediaType.APPLICATION_JSON))
+                        .with(user("user"))
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$[0].info.title", is("test_title")));
